@@ -9,14 +9,15 @@ The baseline now relies on the lightweight [LiteHRNet](https://arxiv.org/abs/210
 The quick start guide will be available soon.
 
 ### Installation
-All dependencies are listed in `requirements.txt`. On Windows 11 you can simply run
+This project requires **Python 3.10**. All dependencies are pinned in `requirements.txt`.
+On Windows 11 you can simply run
 
 ```bash
 pip install -r requirements.txt
 ```
 
 This installs the libraries needed for running the LiteHRNet model, including
-`mmengine` and `mmcv`.
+`mmengine` and `mmcv` with the exact versions used for development.
 You can find the pretrained LiteHRNet weights [here](https://univr-my.sharepoint.com/:u:/g/personal/andrea_toaiari_univr_it/EXVXjMoApr5FvECihR220xwB8vg0dC5OMqOCeZWtypaV1g?e=oJ1kXE). To use them, modify the `TEST.MODEL_FILE` parameter in the config file (`experiments/harper/litehrnet/lite_w32_256x256_adam_lr1e-3_harper.yaml`) with the correct path.
 
 ### Data preparation
