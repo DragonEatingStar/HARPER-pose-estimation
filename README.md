@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 
 This installs the libraries needed for running the LiteHRNet model, including
-`mmengine` and `mmcv-full`.
+`mmengine` and `mmcv`.
 You can find the pretrained LiteHRNet weights [here](https://univr-my.sharepoint.com/:u:/g/personal/andrea_toaiari_univr_it/EXVXjMoApr5FvECihR220xwB8vg0dC5OMqOCeZWtypaV1g?e=oJ1kXE). To use them, modify the `TEST.MODEL_FILE` parameter in the config file (`experiments/harper/litehrnet/lite_w32_256x256_adam_lr1e-3_harper.yaml`) with the correct path.
 
 ### Data preparation
