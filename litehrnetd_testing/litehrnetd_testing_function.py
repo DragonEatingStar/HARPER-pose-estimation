@@ -193,10 +193,6 @@ def create_3d_projection(config, preds, meta, output_dir, visualize=False):
         rotated_image, rotmat, top_left = rotate_image(
             img, -meta_info["rgb_camera_rotation"].item()
         )
-
-        rotated_image, rotmat, top_left = rotate_image(
-            img, -meta_info["rgb_camera_rotation"].item()
-        )
         rotated_kpts = cv2.transform(
             predicted_pose_2d.astype(np.float32).reshape(-1, 1, 2), rotmat
         ).reshape(-1, 2)
