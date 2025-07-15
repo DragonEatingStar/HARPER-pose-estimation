@@ -24,9 +24,9 @@ DATASET:
   TRAIN_SET: 'train2017'
 MODEL:
   INIT_WEIGHTS: true
-  NAME: pose_hrnet
+  NAME: pose_litehrnet
   NUM_JOINTS: 17
-  PRETRAINED: 'models/pytorch/pose_coco/pose_hrnet_w32_384x288.pth'
+  PRETRAINED: 'models/pytorch/pose_coco/pose_litehrnet_w32_384x288.pth'
   TARGET_TYPE: gaussian
   IMAGE_SIZE:
   - 288
@@ -36,58 +36,23 @@ MODEL:
   - 96
   SIGMA: 3
   EXTRA:
-    PRETRAINED_LAYERS:
-    - 'conv1'
-    - 'bn1'
-    - 'conv2'
-    - 'bn2'
-    - 'layer1'
-    - 'transition1'
-    - 'stage2'
-    - 'transition2'
-    - 'stage3'
-    - 'transition3'
-    - 'stage4'
-    FINAL_CONV_KERNEL: 1
-    STAGE2:
-      NUM_MODULES: 1
-      NUM_BRANCHES: 2
-      BLOCK: BASIC
-      NUM_BLOCKS:
-      - 4
-      - 4
-      NUM_CHANNELS:
-      - 32
-      - 64
-      FUSE_METHOD: SUM
-    STAGE3:
-      NUM_MODULES: 4
-      NUM_BRANCHES: 3
-      BLOCK: BASIC
-      NUM_BLOCKS:
-      - 4
-      - 4
-      - 4
-      NUM_CHANNELS:
-      - 32
-      - 64
-      - 128
-      FUSE_METHOD: SUM
-    STAGE4:
-      NUM_MODULES: 3
-      NUM_BRANCHES: 4
-      BLOCK: BASIC
-      NUM_BLOCKS:
-      - 4
-      - 4
-      - 4
-      - 4
-      NUM_CHANNELS:
-      - 32
-      - 64
-      - 128
-      - 256
-      FUSE_METHOD: SUM
+    stem:
+      stem_channels: 32
+      out_channels: 32
+      expand_ratio: 1
+    num_stages: 3
+    stages_spec:
+      num_modules: [2, 4, 2]
+      num_branches: [2, 3, 4]
+      num_blocks: [2, 2, 2]
+      module_type: ['LITE', 'LITE', 'LITE']
+      with_fuse: [True, True, True]
+      reduce_ratios: [8, 8, 8]
+      num_channels:
+        - [40, 80]
+        - [40, 80, 160]
+        - [40, 80, 160, 320]
+    with_head: False
 LOSS:
   USE_TARGET_WEIGHT: true
 TRAIN:
@@ -112,7 +77,7 @@ TEST:
   BBOX_THRE: 1.0
   IMAGE_THRE: 0.0
   IN_VIS_THRE: 0.2
-  MODEL_FILE: 'models/pytorch/pose_coco/pose_hrnet_w32_384x288.pth'
+  MODEL_FILE: 'models/pytorch/pose_coco/pose_litehrnet_w32_384x288.pth'
   NMS_THRE: 1.0
   OKS_THRE: 0.9
   USE_GT_BBOX: true

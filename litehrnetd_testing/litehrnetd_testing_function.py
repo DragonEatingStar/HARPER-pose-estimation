@@ -7,7 +7,7 @@ from typing import List, Tuple
 import pickle
 from lib import dataset
 from lib.dataset.harper import HARPER_KEYPOINTS, DEPTH_FOVS
-from hrnetd_testing_utils import (
+from litehrnetd_testing_utils import (
     compute_depths_and_labels,
     adjust_depths,
     is_point_in_convex_quadrilateral,
@@ -26,9 +26,9 @@ def process_estimated_3d_poses(estimated_3d_poses: List[dict]) -> dict:
     - estimated_3d_poses: List of estimated 3D poses
 
     Returns:
-    - hrnet_3d_poses: Dictionary containing the estimated 3D poses grouped by sequence
+    - litehrnet_3d_poses: Dictionary containing the estimated 3D poses grouped by sequence
     """
-    hrnet_3d_poses = {}
+    litehrnet_3d_poses = {}
 
     # group frames by sequence
     frames_by_sequence = defaultdict(list)
@@ -38,7 +38,7 @@ def process_estimated_3d_poses(estimated_3d_poses: List[dict]) -> dict:
 
     # process each sequence
     for seq, frames in frames_by_sequence.items():
-        hrnet_3d_poses[seq] = [
+        litehrnet_3d_poses[seq] = [
             {
                 "pred_human_joints_2d": frame["pred_human_joints_2d"],
                 "pred_human_joints_3d": frame["pred_human_joints_3d"],
@@ -56,10 +56,10 @@ def process_estimated_3d_poses(estimated_3d_poses: List[dict]) -> dict:
         ]
 
     # sort the frames by frame number
-    for seq in hrnet_3d_poses:
-        hrnet_3d_poses[seq] = sorted(hrnet_3d_poses[seq], key=lambda x: x["frame_n"])
+    for seq in litehrnet_3d_poses:
+        litehrnet_3d_poses[seq] = sorted(litehrnet_3d_poses[seq], key=lambda x: x["frame_n"])
 
-    return hrnet_3d_poses
+    return litehrnet_3d_poses
 
 
 def compute_3d_output(config, output_dir, estimated_3d_poses: List[dict]):
@@ -115,13 +115,13 @@ def compute_3d_output(config, output_dir, estimated_3d_poses: List[dict]):
             f"Joint {j} ({HARPER_KEYPOINTS[j]}): {round(jmpjpe, 3)} - count: {int(joints_3d_counts[j])}"
         )
 
-    hrnet_3d_poses = process_estimated_3d_poses(estimated_3d_poses)
+    litehrnet_3d_poses = process_estimated_3d_poses(estimated_3d_poses)
     # save the 3d poses in pickle format
     with open(
-        os.path.join(output_dir, f"hrnetd_poses_harper_{config.DATASET.TEST_SET}.pkl"),
+        os.path.join(output_dir, f"litehrnet_poses_harper_{config.DATASET.TEST_SET}.pkl"),
         "wb",
     ) as f:
-        pickle.dump(hrnet_3d_poses, f)
+        pickle.dump(litehrnet_3d_poses, f)
 
 
 def create_3d_projection(config, preds, meta, output_dir, visualize=False):
