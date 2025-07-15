@@ -26,6 +26,9 @@ def compute_depths_and_labels(joint_labels, predicted_pose_2d, depth_frame, fov)
     """
     depths = []
     for pidx, (pixel_x, pixel_y) in enumerate(predicted_pose_2d):
+        # clip coordinates inside the depth frame bounds
+        pixel_x = int(np.clip(pixel_x, 0, depth_frame.shape[1] - 1))
+        pixel_y = int(np.clip(pixel_y, 0, depth_frame.shape[0] - 1))
         # if the depth frame is empty
         if np.all(depth_frame == 0.0):
             joint_labels[pidx] = 4

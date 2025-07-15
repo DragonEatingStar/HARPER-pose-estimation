@@ -1,1 +1,1 @@
-docker build -t hrnet_demo_inference .
+docker build -t litehrnet_demo_inference .

@@ -25,7 +25,7 @@ from lib.core.function import AverageMeter
 from lib.core.evaluate import accuracy
 from lib.core.inference import get_max_preds
 
-from hrnetd_testing_function import create_3d_projection, compute_3d_output
+from litehrnetd_testing_function import create_3d_projection, compute_3d_output
 
 
 def validate(

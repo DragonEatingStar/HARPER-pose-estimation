@@ -1,6 +1,6 @@
-# Inference hrnet
+# Inference LiteHRNet
 
-Inferencing the deep-high-resolution-net.pytoch without using Docker. 
+Running the LiteHRNet pose estimator without using Docker.
 
 ## Prep
 1. Download the researchers' pretrained pose estimator from [google drive](https://drive.google.com/drive/folders/1hOTihvbyIxsm5ygDpbUuJ7O_tzv4oXjC?usp=sharing) to this directory under `models/`
@@ -15,7 +15,7 @@ python demo/inference.py --cfg demo/inference-config.yaml \
     --videoFile ../../multi_people.mp4 \
     --writeBoxFrames \
     --outputDir output \
-    TEST.MODEL_FILE ../models/pytorch/pose_coco/pose_hrnet_w32_256x192.pth 
+    TEST.MODEL_FILE ../models/pytorch/pose_coco/pose_litehrnet_w32_256x192.pth
 
 ```
 
