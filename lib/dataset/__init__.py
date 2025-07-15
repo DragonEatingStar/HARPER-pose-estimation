@@ -10,3 +10,5 @@ from __future__ import print_function
 
 from .mpii import MPIIDataset as mpii
 from .coco import COCODataset as coco
+# Alias HARPER to the COCO-style dataset until a dedicated loader is available
+from .coco import COCODataset as harper

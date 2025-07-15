@@ -23,6 +23,14 @@ You can find the pretrained LiteHRNet weights [here](https://univr-my.sharepoint
 Follow the steps in the HARPER [official repository](https://github.com/intelligolabs/HARPER) to download the dataset and prepare the data.   
 Modify the `DATASET.ROOT` parameter in the config file with the correct path.
 
+### Training
+To train the LiteHRNet model on HARPER run
+
+```bash
+python tools/train.py --cfg experiments/harper/litehrnet/lite_w32_256x256_train.yaml
+```
+
+
 ## Credits
 This code is based on the [HRNet](https://arxiv.org/abs/1908.07919) architecture, forking this [implementation](https://github.com/leoxiaobin/deep-high-resolution-net.pytorch).
 
